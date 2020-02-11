@@ -519,13 +519,13 @@
         // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
         NSString *userId = [command.arguments objectAtIndex:0];
         [FBSDKAppEvents setUserID:userId];
-        res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+        CDVPluginResult *res = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         [self.commandDelegate sendPluginResult:res callbackId:command.callbackId];
     }];
 }
 
 - (void)clearUserId:(CDVInvokedUrlCommand *)command {
-    [FBSDKAppEvents clearUserId];
+    [FBSDKAppEvents clearUserID];
 }
 
 - (void)getUserId:(CDVInvokedUrlCommand *)command {
@@ -539,7 +539,7 @@
     [self.commandDelegate runInBackground:^{
         // For more verbose output on logging uncomment the following:
         // [FBSettings setLoggingBehavior:[NSSet setWithObject:FBLoggingBehaviorAppEvents]];
-        NSString *userId = [FBSDKAppEvents getUserID];
+        NSString *userId = [FBSDKAppEvents userID];
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString: userId];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
     }];
